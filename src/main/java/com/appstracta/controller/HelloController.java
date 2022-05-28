@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/hello")
 public class HelloController {
 
-	@GetMapping("/hello")
 	public String hello(Model model) {
 		model.addAttribute("message", "Hello Spring MVC Framework!");
 

@@ -2,12 +2,14 @@ package com.appstracta.configuration;
 
 import java.util.Properties;
 
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import org.jboss.logging.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jndi.JndiTemplate;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -20,6 +22,7 @@ public class HibernateConfiguration {
 	@Bean
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+
 		sessionFactory.setDataSource(dataSource());
 		sessionFactory.setPackagesToScan("com.appstracta.model");
 		sessionFactory.setHibernateProperties(hibernateProperties());
@@ -34,11 +37,19 @@ public class HibernateConfiguration {
 
 		try {
 			dataSource = (DataSource) jndiTemplate.lookup("java:/dsSakila");
-		} catch (Exception ex) {
-			log.error("Oucrrió un error al obtener el DataSource", ex);
+		} catch (NamingException e) {
+			log.error("Ocurrió un error al obtener el DataSource.");
 		}
 
 		return dataSource;
+	}
+
+	@Bean
+	public HibernateTransactionManager getTransactionManager() {
+		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+		transactionManager.setSessionFactory(sessionFactory().getObject());
+
+		return transactionManager;
 	}
 
 	private Properties hibernateProperties() {
@@ -51,4 +62,5 @@ public class HibernateConfiguration {
 
 		return properties;
 	}
+
 }
