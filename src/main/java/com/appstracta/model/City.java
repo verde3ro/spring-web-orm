@@ -2,6 +2,7 @@ package com.appstracta.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 
 /**
  * The persistent class for the city database table.
@@ -22,6 +25,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="city")
 @NamedQuery(name="City.findAll", query="SELECT c FROM City c")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class City implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -42,6 +46,17 @@ public class City implements Serializable {
 	private Country country;
 
 	public City() {
+	}
+
+	public City(String city) {
+		this.city = city;
+	}
+
+	public City(short cityId, String city, Date lastUpdate, short countryId, String country) {
+		this.cityId = cityId;
+		this.city = city;
+		this.lastUpdate = new Timestamp(lastUpdate.getTime());
+		this.country = new Country(countryId, country);
 	}
 
 	public short getCityId() {
