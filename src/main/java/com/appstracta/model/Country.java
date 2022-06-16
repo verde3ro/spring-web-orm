@@ -20,7 +20,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="country")
-@NamedQuery(name="Country.findAll", query="SELECT c FROM Country c")
+@NamedQuery(name="Country.findAll", query="SELECT c FROM Country c ORDER BY c.countryId ASC")
 public class Country implements Serializable {
 	private static final long serialVersionUID = 1L;
 
