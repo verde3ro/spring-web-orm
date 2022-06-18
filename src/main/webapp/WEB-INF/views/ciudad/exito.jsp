@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<title>Crear nueva ciudad</title>
+<meta charset="UTF-8">
+<title>Crear nueva ciudad éxito</title>
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport"
@@ -59,28 +58,9 @@
 			<p>&nbsp;</p>
 			<div class="row">
 				<div class="col-lg-6">
-					<form:form action="guardar" method="POST" modelAttribute="cityform">
-						<div class="form-group">
-							<label for="city">* Nombre ciudad:</label>
-							<input type="text" class="form-control" id="city" name="city" placeholder="Nombre de la ciudad" required>
-						</div>
-						<div class="form-group">
-							<label for="country">* País:</label>
-							<select id="countryId" name="countryId" class="form-control" required>
-								<option value="">Selecciona una opción</option>
-								<c:forEach items="${countries}" var="country">
-									<option value="${country.countryId}">${country.country}</option>
-								</c:forEach>
-							</select>
-						</div>
-						<button type="submit" class="btn btn-primary">Crear</button>
-						<c:if test="${not empty error}">
-						<p>&nbsp;</p>
-						<div class="alert alert-danger" role="alert">
-							${error}
-						</div>
-						</c:if>
-					</form:form>
+					<div class="alert alert-success" role="alert">
+						La ciudad ${city.city} se guardo con éxito con el id ${city.cityId}.
+					</div>
 				</div>
 			</div>
 		</div>

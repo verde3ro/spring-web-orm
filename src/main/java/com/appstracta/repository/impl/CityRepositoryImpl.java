@@ -2,16 +2,16 @@ package com.appstracta.repository.impl;
 
 import java.util.List;
 
+import com.appstracta.exception.InternalException;
+import com.appstracta.model.City;
+import com.appstracta.repository.ICityRepository;
+import com.appstracta.response.CityResponse;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import com.appstracta.exception.InternalException;
-import com.appstracta.model.City;
-import com.appstracta.repository.ICityRepository;
-import com.appstracta.response.CityResponse;
 
 @Repository
 public class CityRepositoryImpl implements ICityRepository {
@@ -65,6 +65,19 @@ public class CityRepositoryImpl implements ICityRepository {
 		} catch (Exception ex) {
 			log.error("Ocurrió un error al obtener las ciudades.", ex);
 			throw new InternalException("Ocurrió un error al obtener las ciudades.");
+		}
+	}
+
+
+	@Override
+	public Short guardar(City city) throws InternalException {
+		try {
+			Session session = this.sessionFactory.getCurrentSession();
+
+			return (Short) session.save(city);
+		} catch (Exception ex) {
+			log.error("Ocurrió un error al guardar la ciudad.", ex);
+			throw new InternalException("Ocurrió un error al guardar la ciudad.");
 		}
 	}
 

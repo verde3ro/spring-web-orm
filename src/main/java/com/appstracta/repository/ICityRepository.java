@@ -12,4 +12,6 @@ public interface ICityRepository {
 
 	List<CityResponse> obtenerTodosResponse() throws InternalException;
 
+	Short guardar(City city) throws InternalException;
+
 }

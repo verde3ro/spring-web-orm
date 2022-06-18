@@ -42,6 +42,10 @@ public class Country implements Serializable {
 	public Country() {
 	}
 
+	public Country(short countryId) {
+		this.countryId = countryId;
+	}
+
 	public Country(short countryId, String country) {
 		this.countryId = countryId;
 		this.country = country;

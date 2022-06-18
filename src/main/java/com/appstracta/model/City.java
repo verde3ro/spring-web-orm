@@ -32,7 +32,7 @@ public class City implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="city_id", unique=true, nullable=false)
-	private short cityId;
+	private Short cityId;
 
 	@Column(nullable=false, length=50)
 	private String city;
@@ -59,11 +59,11 @@ public class City implements Serializable {
 		this.country = new Country(countryId, country);
 	}
 
-	public short getCityId() {
+	public Short getCityId() {
 		return this.cityId;
 	}
 
-	public void setCityId(short cityId) {
+	public void setCityId(Short cityId) {
 		this.cityId = cityId;
 	}
 
